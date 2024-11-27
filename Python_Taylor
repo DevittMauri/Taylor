@@ -1,0 +1,37 @@
+import sympy as sp
+
+def taylor_approximation(func_expr, var, center, order, eval_point=None):
+    """
+    Calcula la aproximación de Taylor de una función.
+    
+    :param func_expr: La función como expresión de Sympy
+    :param var: La variable independiente (símbolo de Sympy)
+    :param center: El punto donde se centra la serie de Taylor
+    :param order: El orden de la aproximación de Taylor
+    :param eval_point: El punto donde se evalúa la aproximación (opcional)
+    :return: Aproximación de Taylor y, si eval_point se proporciona, su valor aproximado
+    """
+    # Calcular la serie de Taylor
+    taylor_series = sp.series(func_expr, var, center, order + 1).removeO()
+    
+    # Evaluar la serie en el punto, si se proporciona
+    if eval_point is not None:
+        approx_value = taylor_series.subs(var, eval_point)
+        return taylor_series, approx_value
+    
+    return taylor_series
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    x = sp.symbols('x')  # Definir la variable simbólica
+    func = sp.sin(x)  # Función a aproximar
+    center = 0  # Punto de expansión (serie de Taylor centrada en 0)
+    order = 5  # Orden de la aproximación
+    
+    # Obtener la serie de Taylor y evaluarla en un punto opcional
+    taylor_series, approx_value = taylor_approximation(func, x, center, order, eval_point=1)
+    
+    # Mostrar resultados
+    print(f"Serie de Taylor (orden {order}) de la función {func} centrada en {center}:")
+    print(taylor_series)
+    print(f"Valor aproximado de la función en x=1: {approx_value}")
