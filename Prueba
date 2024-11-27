@@ -1,0 +1,14 @@
+func = sp.exp(x)  # Función exponencial
+center = 0        # Punto de expansión
+order = 4         # Orden de la aproximación
+
+Si evalúas en 
+𝑥
+=
+1
+x=1, calculará el valor aproximado de 
+𝑒
+1
+e 
+1
+ .
